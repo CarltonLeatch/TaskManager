@@ -9,9 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Azorah</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,16 +22,64 @@
     <![endif]-->
   </head>
   <body>
- <div id = "nav-bar">
- 	<div id = "sidebar-nav">
- 		<ul class = "sidebar-nav">
- 			<li class = "sidebar-brand">
- 				<a href = "dashboard.jsp">Click</a>
- 				</li>
- 		</ul>
- 	</div>
-</div>
+ <div id="wrapper" class = "toggled">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.jsp">
+                        Azorah.pl
+                    </a>
+                </li>
+                <li>
+                    <a href="dashboard.jsp">Dashboard</a>
+                </li>
+                <li>
+                    <a href="inbox.jsp">Inbox</a>
+                </li>
+                <li>
+                    <a href="pojects.jsp">Projects</a>
+                </li>
+                <li>
+                    <a href="index.jsp">Logout</a>
+                </li>
+                
+            </ul>
+        </div>
+        
     
+    <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Simple Sidebar</h1>
+                        <p>Welcome to the start page
+                        
+                        <%@page import = "java.sql.Connection" %>
+                        <%@page import = "dao.DBConnection" %>
+                        <%@page import = "java.sql.DriverManager" %>
+                        <%
+                        DBConnection db = new DBConnection();
+                        Connection conn = db.getConnection();
+                        
+                        if(conn == null)
+                        	out.print("conn filed");
+                        else
+                        	out.print("conn succed");
+                        
+                        
+                        
+                        
+                        %>
+                        
+                        
+                        </p>
+                        <a href="" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
