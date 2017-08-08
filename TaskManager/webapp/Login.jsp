@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-<title>Dashboard</title>
+<title>Login</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!-- Custom CSS -->
@@ -26,11 +26,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form method = "post" action = "register">
+                        <form method = "post" action = "login">
 					<label>Username: <input type = "text" id ="username" name = "username" /></label><br/>
-					<label>E-mail: <input type = "email" id = "email" name = "email"/></label><br/>
 					<label>Password: <input type = "text" id ="password" name = "password" /></label><br/>
-					<label>Confirm password: <input type = "text" id ="passwordConfi" name = "passwordConfi" /></label><br/>
 					<input type = "submit" value = "wyslij"/>
 					</form>
                     </div>

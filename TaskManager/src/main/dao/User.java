@@ -1,11 +1,23 @@
 package dao;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "users")
 public class User {
 	
 	private int USER_ID;
 	public String Username;
 	public String Password;
+	public String Email;
 	
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
 	public String getUsername() {
 		return Username;
 	}

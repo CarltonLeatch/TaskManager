@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebFilter("*") // url mapping 
+//@WebFilter("*") // url mapping 
 public class CommonFilter implements Filter{
 	HashSet<String> invalidExts = new HashSet<String>();
 

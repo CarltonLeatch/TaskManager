@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <%@page import = "java.sql.Connection" %>
+ <%@page import = "dao.DBConnection" %>
+ <%@page import = "services.UserService" %>
+ <%@page import = "dao.User" %>
+<%@page import = "java.sql.DriverManager" %>
+<%@page import = "java.sql.Statement" %>
+<%@page import = "java.sql.ResultSet" %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -25,43 +33,47 @@
  <div id="wrapper" class = "toggled">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="index.jsp">
-                        Azorah.pl
-                    </a>
-                </li>
-                <li>
-                    <a href="dashboard.jsp">Dashboard</a>
-                </li>
-                <li>
-                    <a href="inbox.jsp">Inbox</a>
-                </li>
-                <li>
-                    <a href="pojects.jsp">Projects</a>
-                </li>
-                <li>
-                    <a href="index.jsp">Logout</a>
-                </li>
-                
-            </ul>
-        </div>
+       <jsp:include page = "menu.jsp" /> 
         
     
     <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Simple Sidebar</h1>
-                        <p>Welcome to the start page
+                        <h1>Connections:</h1>
+                        <p>Connection with MySql: 
                         
-                        <%@page import = "java.sql.Connection" %>
-                        <%@page import = "dao.DBConnection" %>
-                        <%@page import = "java.sql.DriverManager" %>
                         <%
                         DBConnection db = new DBConnection();
                         Connection conn = db.getConnection();
+                        
+                        Statement statement = conn.createStatement();
+                        
+                        String insert = "CREATE TABLE IF NOT EXISTS `taskmanager`.`users` ( "
+                        		+"  `user_id` INT NOT NULL AUTO_INCREMENT, "
+                        		+"  `username` VARCHAR(45) NOT NULL,"
+                        		+"  `password` VARCHAR(45) NOT NULL,"
+                        		+"  `Email` VARCHAR(45) NOT NULL,"
+                        		+"  PRIMARY KEY (`user_id`),"
+                        		+"  UNIQUE INDEX `username_UNIQUE` (`username` ASC),"
+                        		+"  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC));";
+
+                        
+         				statement.executeUpdate(insert);
+         				
+         				UserService userdb = new UserService();
+         				
+         				String get = "Select username,password from users";
+         				
+         				ResultSet rs = statement.executeQuery(get);
+         				
+         				if(rs.next()){
+         					User u = new User();
+         					u.setUsername(rs.getString(1));
+         					u.setPassword(rs.getString(2));
+         					
+         					userdb.getAll().add(u);
+         				}
                         
                         if(conn == null)
                         	out.print("conn filed");
@@ -70,12 +82,12 @@
                         
                         
                         
-                        
+                        conn.close();
                         %>
+                     
                         
                         
                         </p>
-                        <a href="" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>
                 </div>
             </div>

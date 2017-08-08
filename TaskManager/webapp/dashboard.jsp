@@ -20,28 +20,7 @@
 <div id="wrapper" class = "toggled">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="index.jsp">
-                        Azorah.pl
-                    </a>
-                </li>
-                <li>
-                    <a href="dashboard.jsp">Dashboard</a>
-                </li>
-                <li>
-                    <a href="inbox.jsp">Inbox</a>
-                </li>
-                <li>
-                    <a href="pojects.jsp">Projects</a>
-                </li>
-                <li>
-                    <a href="index.jsp">Logout</a>
-                </li>
-                
-            </ul>
-        </div>
+       <jsp:include page = "menu.jsp" /> 
         
         <div id="page-content-wrapper">
             <div class="container-fluid">
