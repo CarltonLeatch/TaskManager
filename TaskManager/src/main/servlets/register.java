@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 
 import dao.DBConnection;
-import dao.User;
+
 import entities.Users;
 import model.UsersModel;
 

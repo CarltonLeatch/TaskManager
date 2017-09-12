@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import dao.DBConnection;
-import dao.User;
 import entities.Users;
 import model.UsersModel;
 
