@@ -21,7 +21,9 @@ import javax.servlet.http.HttpSession;
 
 import dao.DBConnection;
 import dao.User;
-import services.UserService;
+import entities.Users;
+import model.UsersModel;
+
 
 /**
  * Servlet implementation class register
@@ -64,42 +66,18 @@ public class register extends HttpServlet {
 		
 		PasswordConfirm(password,passwordConfi);
 		
-		User user = new User();
+		Users user = new Users();
 		user.setUsername(username);
 		user.setPassword(password);
 		user.setEmail(email);
 		
 		
 		
-		UserService userDB = new UserService();
+		UsersModel UM = new UsersModel();
 		
-		userDB.getAll().add(user);
+		UM.add(user);
 		
-		DBConnection db = new DBConnection();
-        Connection conn = db.getConnection();
-        
-        Statement statement;
-		
-			try {
-				statement = conn.createStatement();
-				String insert = "Insert into users(username,password, email) VALUES ('"+username+"','"+password+"','"+email+"');";
-		        
-				statement.executeUpdate(insert);
-				
-				
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-        
-        
-		
-		response.getWriter().println(userDB.getAll());
-		
-		
-		
+		response.sendRedirect("index.jsp");
 	}
 	
 	private boolean PasswordConfirm(String password, String PasswordConfirm){

@@ -3,11 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  <%@page import = "java.sql.Connection" %>
  <%@page import = "dao.DBConnection" %>
- <%@page import = "services.UserService" %>
- <%@page import = "dao.User" %>
+
+ <%@page import = "entities.Users" %>
+   <%@page import = "model.UsersModel" %>
+  
 <%@page import = "java.sql.DriverManager" %>
 <%@page import = "java.sql.Statement" %>
 <%@page import = "java.sql.ResultSet" %>
+
+<%@page import = "org.hibernate.Session" %>
+<%@page import = "org.hibernate.SessionFactory" %>
+<%@page import = "org.hibernate.Transaction" %> 
+<%@page import = "org.hibernate.cfg.Configuration"%>
+
+
 
 <html>
 <head>
@@ -44,10 +53,12 @@
                         <p>Connection with MySql: 
                         
                         <%
-                        DBConnection db = new DBConnection();
-                        Connection conn = db.getConnection();
+                       // DBConnection db = new DBConnection();
+                      //  Connection conn = db.getConnection();
+                                             
                         
-                        Statement statement = conn.createStatement();
+                        
+                      /*  Statement statement = conn.createStatement();
                         
                         String insert = "CREATE TABLE IF NOT EXISTS `taskmanager`.`users` ( "
                         		+"  `user_id` INT NOT NULL AUTO_INCREMENT, "
@@ -83,6 +94,12 @@
                         
                         
                         conn.close();
+                        
+                        
+                      */
+                       
+                        
+                      
                         %>
                      
                         

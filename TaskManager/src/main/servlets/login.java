@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import dao.DBConnection;
 import dao.User;
-import services.UserService;
+import entities.Users;
+import model.UsersModel;
+
 
 /**
  * Servlet implementation class login
@@ -45,26 +48,29 @@ public class login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		
 		HttpSession session = request.getSession();
 		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+
 		
-		UserService userDB = new UserService();
+		UsersModel UM = new UsersModel();
+	
+		Users user = UM.login(request.getParameter("username"), request.getParameter("password"));
 		
-		for(User u : userDB.getAll()){
+		if(user!=null){
+			session.setAttribute("LoggedIn", "true");
 			
-			if(u.getUsername().equalsIgnoreCase(username) && u.getPassword().equals(password));
-				{
-					session.setAttribute("LoggedIn", true);
-				
+			response.sendRedirect("dashboard.jsp");
 			
-				}
-				response.sendRedirect("/TaskManager/index.jsp");
+		}else{
+			
+			response.getWriter().println(request.getParameter("username"));
+			response.getWriter().println(request.getParameter("password"));
+			
+			response.getWriter().println(user);
+			
+			response.getWriter().println("Blond");
 		}
-			
-		
-		
 	}
 
 }
