@@ -16,5 +16,6 @@
   <property name="hibernate.connection.requireSSL">false</property>
 
   <mapping class="entities.Users"/>
+  <mapping class="entities.Projects" />
  </session-factory>
 </hibernate-configuration>

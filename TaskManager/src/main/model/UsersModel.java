@@ -2,8 +2,8 @@ package model;
 
 import entities.*;
 
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.*;
 
@@ -33,15 +33,20 @@ public class UsersModel extends AbstractModel<Users>{
 		try{
 			if(!sessionFactory.getCurrentSession().getTransaction().isActive())
 				sessionFactory.getCurrentSession().getTransaction().begin();
-			Query q = this.sessionFactory
+			Users u  = (Users)sessionFactory.getCurrentSession().getNamedQuery("loginAndPassword")
+					.setParameter("username", username)
+					.setParameter("password", password)
+					.uniqueResult();
+			/*Query q = this.sessionFactory
 					.getCurrentSession()
-					.createQuery("SELECT u FROM users u WHERE u.username=:username AND u.password=:password")
+					.createSQLQuery("Select * from users where username = :username and password = :password")
 					.setParameter("username", username)
 					.setParameter("password", password);
-		
+			*/
+			
 			
 		//	q.setString("password", password);
-			return (Users) q.uniqueResult();
+			return u;
 			
 		}catch(Exception e){
 			return null;

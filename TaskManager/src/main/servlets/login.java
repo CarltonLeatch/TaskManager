@@ -62,13 +62,9 @@ public class login extends HttpServlet {
 			response.sendRedirect("dashboard.jsp");
 			
 		}else{
+		
 			
-			response.getWriter().println(request.getParameter("username"));
-			response.getWriter().println(request.getParameter("password"));
-			
-			response.getWriter().println(user);
-			
-			response.getWriter().println("Blond");
+			//response.getWriter().println("Blond");
 		}
 	}
 

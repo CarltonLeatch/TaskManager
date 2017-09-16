@@ -10,6 +10,7 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,13 +23,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "users", catalog = "TaskManager", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
 		@UniqueConstraint(columnNames = "Email") })
-
+@NamedQueries({
+@NamedQuery(name = "loginAndPassword", query = "FROM Users u WHERE u.username = :username AND u.password = :password")
+})
 public class Users implements java.io.Serializable {
 
 	private Integer userId;
 	private String username;
 	private String password;
 	private String email;
+	private Projects projects;
 
 	public Users() {
 	}
@@ -76,6 +80,14 @@ public class Users implements java.io.Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	@OneToMany
+	public Projects getProjects() {
+		return projects;
+	}
+
+	public void setProjects(Projects projects) {
+		this.projects = projects;
 	}
 
 }
