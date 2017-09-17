@@ -64,6 +64,8 @@ public class register extends HttpServlet {
 		String password = request.getParameter("password");
 		String passwordConfi = request.getParameter("passwordConfi");
 		
+		UsersModel UM = new UsersModel();
+		if(UM.register(request.getParameter("username"), request.getParameter("email")) == null){
 		PasswordConfirm(password,passwordConfi);
 		
 		Users user = new Users();
@@ -72,12 +74,16 @@ public class register extends HttpServlet {
 		user.setEmail(email);
 		
 		
-		
-		UsersModel UM = new UsersModel();
+		session.setAttribute("RegisterConfirm", "true");
+		session.setAttribute("RegisterError", "false");
 		
 		UM.add(user);
 		
 		response.sendRedirect("index.jsp");
+		}else
+		session.setAttribute("RegisterConfirm", "false");
+		session.setAttribute("RegisterError", "true");
+		response.sendRedirect("register.jsp");
 	}
 	
 	private boolean PasswordConfirm(String password, String PasswordConfirm){
@@ -89,30 +95,3 @@ public class register extends HttpServlet {
 }
 
 
-/*
- * 
- *    <%@page import = "java.sql.Connection" %>
-                        <%@page import = "dao.DBConnection" %>
-                        <%@page import = "java.sql.DriverManager" %>
-                        <%@page import = "java.sql.Statement" %>
-                        <%
-                        DBConnection db = new DBConnection();
-                        Connection conn = db.getConnection();
-                        
-                        Statement statement = conn.createStatement();
-                        
-                        String insert = "Insert into users(username,password) VALUES ('Rafal','Ochot');";
-                        
-         				statement.executeUpdate(insert);
-         				
-                        
-                        if(conn == null)
-                        	out.print("conn filed");
-                        else
-                        	out.print("conn succed");
-                        
-                        
-                        
-                        
-                        %>
-*/

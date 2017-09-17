@@ -58,11 +58,14 @@ public class login extends HttpServlet {
 		
 		if(user!=null){
 			session.setAttribute("LoggedIn", "true");
-			
+			session.setAttribute("LoginError", "false");
 			response.sendRedirect("dashboard.jsp");
 			
 		}else{
 		
+			session.setAttribute("LoggedIn", "false");
+			session.setAttribute("LoginError", "true");
+			response.sendRedirect("Login.jsp");
 			
 			//response.getWriter().println("Blond");
 		}

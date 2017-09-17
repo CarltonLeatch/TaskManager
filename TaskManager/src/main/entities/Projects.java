@@ -8,7 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "projects", catalog = "TaskManager")
 public class Projects {
 	
 	private int project_id;

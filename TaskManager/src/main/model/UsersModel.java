@@ -50,8 +50,23 @@ public class UsersModel extends AbstractModel<Users>{
 			
 		}catch(Exception e){
 			return null;
-		}
-	
+		}			
 	}
+	
+	public Users register(String username, String email){
+		try{
+			if(!sessionFactory.getCurrentSession().getTransaction().isActive())
+				sessionFactory.getCurrentSession().getTransaction().begin();
+			
+			Users u = (Users) sessionFactory.getCurrentSession().getNamedQuery("loginOrEmail")
+					.setParameter("username", username)
+					.setParameter("email", email)
+					.uniqueResult();
+				return u;
+		}catch(Exception e){
+			return null;
+		}
+	}
+
 
 }

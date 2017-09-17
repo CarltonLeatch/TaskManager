@@ -5,6 +5,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.List;
+
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
@@ -24,7 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "users", catalog = "TaskManager", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
 		@UniqueConstraint(columnNames = "Email") })
 @NamedQueries({
-@NamedQuery(name = "loginAndPassword", query = "FROM Users u WHERE u.username = :username AND u.password = :password")
+@NamedQuery(name = "loginAndPassword", query = "FROM Users u WHERE u.username = :username AND u.password = :password"),
+@NamedQuery(name = "loginOrEmail", query = "FROM Users u WHERE u.username = :username OR u.email = :email")
 })
 public class Users implements java.io.Serializable {
 
@@ -32,15 +36,17 @@ public class Users implements java.io.Serializable {
 	private String username;
 	private String password;
 	private String email;
-	private Projects projects;
+	private List<Projects> projects;
 
+	
 	public Users() {
 	}
 
-	public Users(String username, String password, String email) {
+	public Users(String username, String password, String email, List<Projects> projects) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.projects = projects;
 	}
 
 	@Id
@@ -82,12 +88,13 @@ public class Users implements java.io.Serializable {
 		this.email = email;
 	}
 	@OneToMany
-	public Projects getProjects() {
+	public List<Projects> getProjects() {
 		return projects;
 	}
 
-	public void setProjects(Projects projects) {
+	public void setProjects(List<Projects> projects) {
 		this.projects = projects;
 	}
+
 
 }

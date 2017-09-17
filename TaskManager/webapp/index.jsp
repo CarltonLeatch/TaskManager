@@ -15,7 +15,7 @@
 <%@page import = "org.hibernate.SessionFactory" %>
 <%@page import = "org.hibernate.Transaction" %> 
 <%@page import = "org.hibernate.cfg.Configuration"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <html>
@@ -49,58 +49,22 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>Connections:</h1>
-                        <p>Connection with MySql: 
-                        
-                        <%
-                       // DBConnection db = new DBConnection();
-                      //  Connection conn = db.getConnection();
-                                             
-                        
-                        
-                      /*  Statement statement = conn.createStatement();
-                        
-                        String insert = "CREATE TABLE IF NOT EXISTS `taskmanager`.`users` ( "
-                        		+"  `user_id` INT NOT NULL AUTO_INCREMENT, "
-                        		+"  `username` VARCHAR(45) NOT NULL,"
-                        		+"  `password` VARCHAR(45) NOT NULL,"
-                        		+"  `Email` VARCHAR(45) NOT NULL,"
-                        		+"  PRIMARY KEY (`user_id`),"
-                        		+"  UNIQUE INDEX `username_UNIQUE` (`username` ASC),"
-                        		+"  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC));";
+                     
+                       <c:choose>
+                		<c:when test = "${sessionScope.RegisterConfirm== true}">
+                		<div class="alert alert-success">
+						  <strong>Success!</strong> You created an account. Now you can sing in into website.
+						</div>
 
-                        
-         				statement.executeUpdate(insert);
-         				
-         				UserService userdb = new UserService();
-         				
-         				String get = "Select username,password from users";
-         				
-         				ResultSet rs = statement.executeQuery(get);
-         				
-         				if(rs.next()){
-         					User u = new User();
-         					u.setUsername(rs.getString(1));
-         					u.setPassword(rs.getString(2));
-         					
-         					userdb.getAll().add(u);
-         				}
-                        
-                        if(conn == null)
-                        	out.print("conn filed");
-                        else
-                        	out.print("conn succed");
-                        
-                        
-                        
-                        conn.close();
-                        
-                        
-                      */
-                       
-                        
-                      
+                		
+                		</c:when>
+                		<c:otherwise>
+                		<%
+						request.getSession().setAttribute("RegisterConfirm", "false");
                         %>
+                		</c:otherwise>
+                		</c:choose>
+                     
                      
                         
                         
