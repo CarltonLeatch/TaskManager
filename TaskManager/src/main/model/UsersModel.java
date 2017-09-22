@@ -29,6 +29,35 @@ public class UsersModel extends AbstractModel<Users>{
 		
 	}
 	
+	
+	public void update(Users user){
+		try{
+			if(!sessionFactory.getCurrentSession().getTransaction().isActive())
+				sessionFactory.getCurrentSession().getTransaction().begin();
+			sessionFactory.getCurrentSession().update(user);
+			
+			sessionFactory.getCurrentSession().getTransaction().commit();
+		}catch(Exception e){
+			
+		}
+		
+	}
+	
+	public Users searchByUsername(String username){
+				try{
+		
+					if(!sessionFactory.getCurrentSession().getTransaction().isActive())
+						sessionFactory.getCurrentSession().getTransaction().begin();
+					Users u = (Users)sessionFactory.getCurrentSession().getNamedQuery("searchByUsername")
+						.setParameter("username", username)
+						.uniqueResult();
+					return u;
+		}catch(Exception e)
+		{
+			return null;
+		}
+	}
+	
 	public Users login(String username, String password){
 		try{
 			if(!sessionFactory.getCurrentSession().getTransaction().isActive())

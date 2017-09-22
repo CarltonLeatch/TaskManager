@@ -50,15 +50,21 @@ public class login extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-
+		
 		
 		UsersModel UM = new UsersModel();
 	
 		Users user = UM.login(request.getParameter("username"), request.getParameter("password"));
 		
+		/*response.getWriter().println(request.getParameter("username"));
+		response.getWriter().println(request.getParameter("password"));
+		
+		response.getWriter().println(user.getUsername());
+		response.getWriter().println(user.getPassword());*/
 		if(user!=null){
 			session.setAttribute("LoggedIn", "true");
 			session.setAttribute("LoginError", "false");
+			session.setAttribute("Username", request.getParameter("username"));
 			response.sendRedirect("dashboard.jsp");
 			
 		}else{
@@ -66,6 +72,7 @@ public class login extends HttpServlet {
 			session.setAttribute("LoggedIn", "false");
 			session.setAttribute("LoginError", "true");
 			response.sendRedirect("Login.jsp");
+			
 			
 			//response.getWriter().println("Blond");
 		}

@@ -27,6 +27,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
+                    
+                    
                     <c:choose>
                 		<c:when test = "${sessionScope.RegisterError == true}">
                 		<div class="alert alert-danger">
@@ -34,16 +36,28 @@
   						 </div>
                 		
                 		</c:when>
-                		<c:otherwise>
-        				  <%
-						request.getSession().setAttribute("RegisterError", "false");
-                        %>
+                		<c:otherwise><% 
+                		request.getSession().setAttribute("RegisterError", "false");
+                		%>
                 		</c:otherwise>
                 		</c:choose>
-                    
-                    <%
-						request.getSession().setAttribute("RegisterError", "false");
+                		<c:choose>
+               			<c:when test = "${sessionScope.RegisterConfirm== true}">
+                		<div class="alert alert-success">
+						  <strong>Success!</strong> You created an account. Now you can sing in into website.
+						</div>
+						</c:when>
+						<c:otherwise>
+						 <%					
+						 request.getSession().setAttribute("RegisterConfirm", "false");
                         %>
+						</c:otherwise>
+                		</c:choose>
+                    
+                  		 <% 
+                  		request.getSession().setAttribute("RegisterConfirm", "false");
+                		request.getSession().setAttribute("RegisterError", "false");
+                		%>
                         <form method = "post" action = "register">
                      <fieldset>
     <div id="legend">

@@ -33,8 +33,7 @@ import model.UsersModel;
 public class register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	@PersistenceContext
-	EntityManager em;
+	
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -58,7 +57,7 @@ public class register extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	HttpSession session = request.getSession();
-		
+	
 		String username = request.getParameter("username");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -79,12 +78,15 @@ public class register extends HttpServlet {
 		
 		UM.add(user);
 		
-		response.sendRedirect("index.jsp");
-		}else
+		
+	
+		}else{
 		session.setAttribute("RegisterConfirm", "false");
 		session.setAttribute("RegisterError", "true");
+		}
 		response.sendRedirect("register.jsp");
 	}
+	
 	
 	private boolean PasswordConfirm(String password, String PasswordConfirm){
 		if(password.equals(PasswordConfirm))

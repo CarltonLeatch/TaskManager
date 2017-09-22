@@ -20,7 +20,7 @@
                    			 <a href="inbox.jsp">Inbox</a>
                 		</li>
               			<li>
-                		    <a href="pojects.jsp">Projects</a>
+                		    <a href="projects.jsp">Projects</a>
                			</li>
                			<li>
                 		    <a href="logout?param=logout">Logout</a>

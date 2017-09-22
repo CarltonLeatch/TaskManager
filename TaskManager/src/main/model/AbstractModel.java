@@ -55,4 +55,14 @@ public class AbstractModel<T> {
 		}
 		
 	}
+	
+	public void delete(T entity){
+		try{
+			if(!sessionFactory.getCurrentSession().getTransaction().isActive())
+				sessionFactory.getCurrentSession().getTransaction().begin();
+			sessionFactory.getCurrentSession().delete(entity);
+		}catch(RuntimeException re){
+			System.out.println(re);
+		}
+}
 }

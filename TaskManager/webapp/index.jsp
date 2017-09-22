@@ -50,20 +50,11 @@
                 <div class="row">
                     <div class="col-lg-12">
                      
-                       <c:choose>
-                		<c:when test = "${sessionScope.RegisterConfirm== true}">
-                		<div class="alert alert-success">
-						  <strong>Success!</strong> You created an account. Now you can sing in into website.
-						</div>
+                    
+                		
 
                 		
-                		</c:when>
-                		<c:otherwise>
-                		<%
-						request.getSession().setAttribute("RegisterConfirm", "false");
-                        %>
-                		</c:otherwise>
-                		</c:choose>
+                		
                      
                      
                         
